@@ -32,7 +32,7 @@ output "dynamodb_table_exports_export_type" {
 }
 output "dynamodb_table_exports_incremental_export_specification" {
   description = "Map of incremental_export_specification values across all dynamodb_table_exports, keyed the same as var.dynamodb_table_exports"
-  value       = { for k, v in aws_dynamodb_table_export.dynamodb_table_exports : k => v.incremental_export_specification if v.incremental_export_specification != null && length(v.incremental_export_specification) > 0 }
+  value       = { for k, v in aws_dynamodb_table_export.dynamodb_table_exports : k => one(v.incremental_export_specification) if v.incremental_export_specification != null && length(v.incremental_export_specification) > 0 }
 }
 output "dynamodb_table_exports_item_count" {
   description = "Map of item_count values across all dynamodb_table_exports, keyed the same as var.dynamodb_table_exports"
